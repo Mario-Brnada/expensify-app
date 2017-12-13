@@ -1,22 +1,20 @@
-import React from "react";
-import moment from "moment";
-import { SingleDatePicker } from "react-dates";
 
-const now = moment();
-console.log(now.format("MMM Do, YYYY"));
-
+import React from 'react';
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+
     this.state = {
-      description: props.expense ? props.expense.description : "",
-      note: props.expense ? props.expense.note : "",
-      amount: props.expense ? (props.expense.amount / 100).toString() : "",
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
       calendarFocused: false,
-      error: ""
-    }
+      error: ''
+    };
   }
   onDescriptionChange = (e) => {
     const description = e.target.value;
@@ -28,6 +26,7 @@ export default class ExpenseForm extends React.Component {
   };
   onAmountChange = (e) => {
     const amount = e.target.value;
+
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState(() => ({ amount }));
     }
@@ -36,19 +35,17 @@ export default class ExpenseForm extends React.Component {
     if (createdAt) {
       this.setState(() => ({ createdAt }));
     }
-
   };
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
   };
   onSubmit = (e) => {
     e.preventDefault();
+
     if (!this.state.description || !this.state.amount) {
-      //Set error state equal to "Please provide description and amount."
-      this.setState(() => ({ error: "Please provide description and amount." }));
+      this.setState(() => ({ error: 'Please provide description and amount.' }));
     } else {
-      //Clear the error
-      this.setState(() => ({ error: "" }));
+      this.setState(() => ({ error: '' }));
       this.props.onSubmit({
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
@@ -92,9 +89,6 @@ export default class ExpenseForm extends React.Component {
           <button>Add Expense</button>
         </form>
       </div>
-    );
+    )
   }
 }
-
-
-

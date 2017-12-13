@@ -8,16 +8,6 @@ import Header from "../components/Header";
 import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
 
 
-
-
-
-
-
-
-
-
-
-
 const AppRouter = () => (
   <BrowserRouter>
     <div>
